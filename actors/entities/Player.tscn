@@ -17,6 +17,12 @@ script = ExtResource( 2 )
 [node name="BulletSpawner" type="Node2D" parent="."]
 position = Vector2( 0, -7 )
 
+[node name="BulletSpawner2" type="Node2D" parent="."]
+position = Vector2( -5, -7 )
+
+[node name="BulletSpawner3" type="Node2D" parent="."]
+position = Vector2( 6, -7 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -100
 

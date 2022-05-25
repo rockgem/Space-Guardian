@@ -9,6 +9,7 @@ var bullet = load("res://actors/objects/Bullet.tscn")
 
 
 func _ready():
+	GameManager.connect("bullet_changed", self, 'on_bullet_changed')
 	$AttackTimer.wait_time = GameManager.player_attack_speed
 
 
@@ -19,7 +20,22 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity * move_speed)
 
 
+func on_bullet_changed():
+	pass
+#	bullet.change_bullet()
+
+
 func _on_AttackTimer_timeout():
+	if GameManager.current_bullet_level >= 3:
+		var b2 = bullet.instance()
+		var b3 = bullet.instance()
+		b2.global_position = $BulletSpawner2.global_position
+		b3.global_position = $BulletSpawner3.global_position
+		get_tree().root.add_child(b2)
+		get_tree().root.add_child(b3)
+		
+		return
+	
 	var b = bullet.instance()
 	b.global_position = $BulletSpawner.global_position
 	

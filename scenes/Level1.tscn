@@ -15,7 +15,9 @@ position = Vector2( 89, 297 )
 position = Vector2( 90, -47 )
 
 [node name="PowerupTimer" type="Timer" parent="."]
-wait_time = 5.0
+autostart = true
+
+[node name="EnemyTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="Locations" type="Node2D" parent="."]
@@ -64,3 +66,4 @@ position = Vector2( 0, 170.5 )
 shape = SubResource( 1 )
 
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]

@@ -18,3 +18,8 @@ func _physics_process(delta):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+
+
+func _on_Area2D_body_entered(body):
+	GameManager.powerup_gain(type)
+	queue_free()
