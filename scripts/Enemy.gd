@@ -11,6 +11,7 @@ func _physics_process(delta):
 
 
 func _on_Area2D_area_entered(area):
+	area.get_parent().queue_free()
 	GameManager.emit_signal("enemy_destroyed", global_position)
 	queue_free()
 
