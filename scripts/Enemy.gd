@@ -2,7 +2,7 @@ extends Sprite
 
 
 var hp: int = 3
-
+var path
 
 
 func _physics_process(delta):

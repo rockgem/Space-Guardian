@@ -17,6 +17,7 @@ func _ready():
 
 
 func on_enemy_destroyed(pos: Vector2):
+	get_tree().root.get_node("/root/Sfx/Explosion").play()
 	var e = explosion.instance()
 	e.global_position = pos
 	
