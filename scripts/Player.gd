@@ -4,6 +4,7 @@ extends KinematicBody2D
 
 var move_speed = 100
 var velocity: Vector2
+var can_fire: bool = false
 
 var bullet = load("res://actors/objects/Bullet.tscn")
 
@@ -20,12 +21,22 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity * move_speed)
 
 
+func _unhandled_key_input(event):
+	if Input.is_action_just_pressed("fire"):
+		can_fire = true
+	elif Input.is_action_just_released("fire"):
+		can_fire = false
+
+
 func on_bullet_changed():
 	pass
 #	bullet.change_bullet()
 
 
 func _on_AttackTimer_timeout():
+	if can_fire == false:
+		return
+	
 	if GameManager.current_bullet_level >= 3:
 		var b2 = bullet.instance()
 		var b3 = bullet.instance()
