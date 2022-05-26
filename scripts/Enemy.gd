@@ -1,6 +1,9 @@
 extends Sprite
 
 
+signal custom_exit
+
+
 var hp: int = 3
 var path
 
@@ -19,4 +22,5 @@ func _on_Area2D_area_entered(area):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
+	emit_signal("custom_exit")
 	queue_free()

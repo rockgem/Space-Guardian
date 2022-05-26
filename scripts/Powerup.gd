@@ -2,7 +2,9 @@ extends Sprite
 
 var type: int
 
-# randomize what type this bitch is
+# randomize what type this is
+# everytime a powerup is produced in the game
+# this ready function will randomize what type of powerup it is going to be
 func _ready():
 	randomize()
 	var rand = randi() % GameManager.POWERUP_TYPE.size()
