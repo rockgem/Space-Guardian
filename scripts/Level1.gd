@@ -36,6 +36,11 @@ func add_powerup():
 
 func _on_PowerupTimer_timeout():
 	add_powerup()
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var rand = rng.randf_range(10, 20)
+	$PowerupTimer.wait_time = rand
 
 
 func _on_EnemyTimer_timeout():

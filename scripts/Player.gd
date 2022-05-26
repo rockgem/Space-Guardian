@@ -24,8 +24,10 @@ func _physics_process(delta):
 func _unhandled_key_input(event):
 	if Input.is_action_just_pressed("fire"):
 		can_fire = true
+		$AttackTimer.start()
 	elif Input.is_action_just_released("fire"):
 		can_fire = false
+		$AttackTimer.stop()
 
 
 func on_bullet_changed():
@@ -36,7 +38,10 @@ func on_bullet_changed():
 func _on_AttackTimer_timeout():
 	if can_fire == false:
 		return
+	elif GameManager.bullets <= 0:
+		return
 	
+	GameManager.bullets -= 1
 	$BulletSFX.play()
 	if GameManager.current_bullet_level >= 3:
 		var b2 = bullet.instance()
@@ -52,4 +57,4 @@ func _on_AttackTimer_timeout():
 	b.global_position = $BulletSpawner.global_position
 	
 	get_tree().root.add_child(b)
-	
+

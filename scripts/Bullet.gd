@@ -14,5 +14,4 @@ func change_bullet():
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	print('bullet freed')
 	queue_free()
