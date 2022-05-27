@@ -3,19 +3,27 @@ extends Sprite
 
 var bullet = load("res://actors/objects/EnemyBullet.tscn")
 
+var hp: int = 400
 var move_speed: float = 70
+var dir = -1
 
 
 func _ready():
-	var tween = Tween.new()
-	add_child(tween)
+	GameManager.connect("boss_destroyed", self, 'death')
 	
-	tween.interpolate_property(self, 'position:y', null, position.y + 100, 1.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.start()
+	$Tween.interpolate_property(self, 'position:y', null, position.y + 100, 1.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.start()
 
 
 func _physics_process(delta):
 	pass
+
+
+func death():
+	set_physics_process(false)
+	$AttackTimer.stop()
+	$AttackCooldown.stop()
+	$AttackDuration.stop()
 
 
 func _on_AttackTimer_timeout():
@@ -40,7 +48,36 @@ func _on_AttackCooldown_timeout():
 		$AttackDuration.start()
 	else:
 		$AttackTimer.stop()
+	
+	$Tween.interpolate_property(self, 'position:x', null, (position.x + 40) * dir, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.start()
+	if dir == -1:
+		dir = 1
+	else:
+		dir = -1
 
 
 func _on_AttackDuration_timeout():
 	$AttackTimer.stop()
+
+
+func _on_HurtBox_area_entered(area):
+	hp -= GameManager.player_damage
+	area.get_parent().queue_free()
+	
+	if hp <= 0:
+		GameManager.emit_signal("boss_destroyed")
+
+
+
+
+
+
+
+
+
+
+
+
+
+

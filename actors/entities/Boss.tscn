@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/sprites/spaceship9-2.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Boss.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 55, 21 )
 
 [node name="Boss" type="Sprite"]
 texture = ExtResource( 1 )
@@ -30,6 +33,17 @@ autostart = true
 [node name="AttackDuration" type="Timer" parent="."]
 autostart = true
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, 3 )
+shape = SubResource( 1 )
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
 [connection signal="timeout" from="AttackDuration" to="." method="_on_AttackDuration_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

@@ -53,7 +53,7 @@ func _on_EnemyTimer_timeout():
 	
 	# randomly offsets the generated groups of enemies
 	# in the x axis
-	e.position.x = rng.randf_range(-60, 60)
+	e.position.x = rng.randf_range(-40, 40)
 	
 	$EnemySpawner.add_child(e)
 

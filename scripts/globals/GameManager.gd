@@ -8,6 +8,7 @@ signal bullet_changed
 signal powerup_gained
 signal enemy_destroyed
 signal scroll_stopped
+signal boss_destroyed
 
 
 enum POWERUP_TYPE{
