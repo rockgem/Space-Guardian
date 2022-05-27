@@ -26,6 +26,23 @@ stretch_margin_top = 4
 stretch_margin_right = 2
 stretch_margin_bottom = 4
 
+[node name="Hp" type="TextureProgress" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -31.0
+margin_right = -123.0
+margin_bottom = -17.0
+value = 39.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 4
+stretch_margin_right = 2
+stretch_margin_bottom = 4
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Options" type="Button" parent="."]

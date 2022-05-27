@@ -22,7 +22,6 @@ wait_time = 5.0
 autostart = true
 
 [node name="LevelTimer" type="Timer" parent="."]
-wait_time = 120.0
 autostart = true
 
 [node name="Locations" type="Node2D" parent="."]

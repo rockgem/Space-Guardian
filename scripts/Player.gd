@@ -60,4 +60,5 @@ func _on_AttackTimer_timeout():
 
 
 func _on_Hurtbox_area_entered(area):
+	GameManager.player_health -= 1
 	area.get_parent().queue_free()
