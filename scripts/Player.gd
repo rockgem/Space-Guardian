@@ -58,3 +58,6 @@ func _on_AttackTimer_timeout():
 	
 	get_tree().root.add_child(b)
 
+
+func _on_Hurtbox_area_entered(area):
+	area.get_parent().queue_free()

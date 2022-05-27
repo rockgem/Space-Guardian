@@ -7,6 +7,7 @@ extends Node
 signal bullet_changed
 signal powerup_gained
 signal enemy_destroyed
+signal scroll_stopped
 
 
 enum POWERUP_TYPE{

@@ -42,7 +42,7 @@ func _on_PowerupTimer_timeout():
 	
 	# generates random spawn times for powerups
 	rng.randomize()
-	var rand = rng.randf_range(1, 2) 
+	var rand = rng.randf_range(2, 10) 
 	$PowerupTimer.wait_time = rand
 
 
@@ -61,6 +61,11 @@ func _on_EnemyTimer_timeout():
 # once this timer pops a boss/miniboss should appear to end the level
 func _on_LevelTimer_timeout():
 	$EnemyTimer.stop()
+	GameManager.emit_signal("scroll_stopped")
+	
+	var boss = load("res://actors/entities/Boss.tscn").instance()
+	$EnemySpawner.add_child(boss)
+	$LevelTimer.stop()
 
 
 
