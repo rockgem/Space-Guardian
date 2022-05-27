@@ -71,6 +71,7 @@ autostart = true
 
 [node name="BulletSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "SFX"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0

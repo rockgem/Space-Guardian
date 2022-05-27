@@ -63,6 +63,7 @@ func _on_AttackDuration_timeout():
 
 func _on_HurtBox_area_entered(area):
 	hp -= GameManager.player_damage
+	GameManager.emit_signal("enemy_destroyed", area.get_parent().global_position)
 	area.get_parent().queue_free()
 	
 	if hp <= 0:

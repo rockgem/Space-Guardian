@@ -27,3 +27,5 @@ margin_top = 24.0
 margin_right = 110.0
 margin_bottom = 44.0
 text = "Settings"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_Play_pressed"]

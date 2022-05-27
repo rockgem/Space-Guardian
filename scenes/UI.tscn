@@ -25,3 +25,18 @@ stretch_margin_left = 2
 stretch_margin_top = 4
 stretch_margin_right = 2
 stretch_margin_bottom = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Options" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -66.0
+margin_top = -26.0
+margin_right = -3.0
+margin_bottom = -6.0
+text = "Options"
+
+[connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]

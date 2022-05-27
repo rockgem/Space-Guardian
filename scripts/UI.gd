@@ -11,3 +11,9 @@ func _ready():
 
 func _physics_process(delta):
 	$TextureProgress.value = GameManager.bullets
+
+
+func _on_Options_pressed():
+	var o = load("res://actors/ui/Options.tscn").instance()
+	
+	$CanvasLayer.add_child(o)
