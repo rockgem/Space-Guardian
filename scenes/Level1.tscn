@@ -1,9 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Level1.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 180.5 )
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 29, -31, 0, 0, 0, 0, 29, 205, 54.0326, 13.2433, -54.0326, -13.2433, -58, 260 )
+}
+
+[sub_resource type="Curve2D" id=6]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 29, -31, 0, 0, 0, 0, 29, 205, -89.6681, 0.943874, 89.6681, -0.943874, 123, 263 )
+}
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 40, 15, 0, 0, 0, 0, 41, 254, -43.4182, 1.88775, 43.4182, -1.88775, 91, 319, 0, 0, 0, 0, 139, 254, 0, 0, 0, 0, 143, 10 )
+}
+
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -51, 68, -60.0517, -3.92862, 60.0517, 3.92862, 95, 38, 0, 0, 0, 0, 225, 65 )
+}
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,10 +38,11 @@ position = Vector2( 90, -47 )
 autostart = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 4.0
 autostart = true
 
 [node name="LevelTimer" type="Timer" parent="."]
+wait_time = 60.0
 autostart = true
 
 [node name="Locations" type="Node2D" parent="."]
@@ -68,6 +89,41 @@ rotation = 1.5708
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
 position = Vector2( 0, 170.5 )
 shape = SubResource( 1 )
+
+[node name="CurveSideLeft" type="Path2D" parent="."]
+curve = SubResource( 5 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CurveSideLeft"]
+position = Vector2( 29, -31 )
+rotate = false
+loop = false
+
+[node name="CurveSideRight" type="Path2D" parent="."]
+position = Vector2( 120, 0 )
+curve = SubResource( 6 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CurveSideRight"]
+position = Vector2( 29, -31 )
+rotate = false
+loop = false
+
+[node name="U" type="Path2D" parent="."]
+position = Vector2( 2, -25 )
+curve = SubResource( 7 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="U"]
+position = Vector2( 40, 15 )
+rotate = false
+loop = false
+
+[node name="Sides" type="Path2D" parent="."]
+position = Vector2( 0, 10 )
+curve = SubResource( 8 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Sides"]
+position = Vector2( -51, 68 )
+rotate = false
+loop = false
 
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]

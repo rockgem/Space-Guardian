@@ -24,6 +24,7 @@ func death():
 	$AttackTimer.stop()
 	$AttackCooldown.stop()
 	$AttackDuration.stop()
+	queue_free()
 
 
 func _on_AttackTimer_timeout():

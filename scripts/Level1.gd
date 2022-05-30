@@ -8,6 +8,7 @@ var enemy = load("res://actors/entities/Enemy.tscn")
 var enemy_group = load("res://actors/entities/EnemyGroup.tscn")
 
 var rng = RandomNumberGenerator.new()
+onready var custom_paths = [$CurveSideRight, $CurveSideLeft, $U, $Sides]
 
 func _ready():
 	GameManager.connect("enemy_destroyed", self, 'on_enemy_destroyed')
@@ -54,9 +55,13 @@ func _on_PowerupTimer_timeout():
 
 
 func _on_EnemyTimer_timeout():
+	randomize()
 	var rand_e = randi() % 2
 	var rand
 	var e
+	
+	var rand_path = randi() % custom_paths.size() - 1
+	
 	
 	if rand_e == 0:
 		e = enemy.instance()
@@ -68,9 +73,9 @@ func _on_EnemyTimer_timeout():
 	
 	# randomly offsets the generated groups of enemies
 	# in the x axis
-	e.position.x = rng.randf_range(-40, 40)
+#	e.position.x = rng.randf_range(-40, 40)
 	
-	$EnemySpawner.add_child(e)
+	custom_paths[rand_path].get_child(0).add_child(e)
 
 
 # once this timer pops a boss/miniboss should appear to end the level

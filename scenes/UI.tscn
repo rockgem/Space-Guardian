@@ -55,6 +55,7 @@ margin_left = -66.0
 margin_top = -26.0
 margin_right = -3.0
 margin_bottom = -6.0
+focus_mode = 0
 text = "Options"
 
 [connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]

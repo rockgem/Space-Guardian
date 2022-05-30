@@ -8,6 +8,12 @@ var amount: int
 func _ready():
 	for child in get_children():
 		child.connect('custom_exit', self, 'on_custom_exit')
+		child.set_physics_process(false)
+
+
+func _physics_process(delta):
+#	global_position.y += 100 * delta
+	get_parent().offset += 100 * delta
 
 
 func set_amount(amount: int):
