@@ -11,6 +11,9 @@ func _ready():
 		child.set_physics_process(false)
 
 
+# we know we needed to .get_parent() here because we are
+# going to be adding this node to be a child of PathFollow2D node
+# which we will be using to move this enemy in a different varities of patterns
 func _physics_process(delta):
 #	global_position.y += 100 * delta
 	get_parent().offset += 100 * delta

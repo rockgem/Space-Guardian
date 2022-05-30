@@ -11,6 +11,7 @@ var bullet = load("res://actors/objects/Bullet.tscn")
 
 func _ready():
 	GameManager.connect("bullet_changed", self, 'on_bullet_changed')
+	GameManager.connect("player_destroyed", self, 'on_player_destroyed')
 	$AttackTimer.wait_time = GameManager.player_attack_speed
 
 
@@ -28,6 +29,13 @@ func _unhandled_key_input(event):
 	elif Input.is_action_just_released("fire"):
 		can_fire = false
 		$AttackTimer.stop()
+
+
+func on_player_destroyed():
+	can_fire = false
+	$AttackTimer.stop()
+	set_physics_process(false)
+	set_process_unhandled_key_input(false)
 
 
 func on_bullet_changed():
@@ -62,3 +70,11 @@ func _on_AttackTimer_timeout():
 func _on_Hurtbox_area_entered(area):
 	GameManager.player_health -= 1
 	area.get_parent().queue_free()
+	
+	if GameManager.player_health <= 0:
+		GameManager.emit_signal("player_destroyed")
+
+
+
+
+

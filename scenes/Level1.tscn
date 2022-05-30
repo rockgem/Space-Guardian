@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Level1.gd" type="Script" id=1]
 
@@ -23,6 +23,11 @@ _data = {
 [sub_resource type="Curve2D" id=8]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -51, 68, -60.0517, -3.92862, 60.0517, 3.92862, 95, 38, 0, 0, 0, 0, 225, 65 )
+}
+
+[sub_resource type="Curve2D" id=9]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 42, 32, -44.0972, 0.31498, 44.0972, -0.31498, 90, 22, 0, 0, 0, 0, 135, 33 )
 }
 
 [node name="Level1" type="Node2D"]
@@ -122,6 +127,14 @@ curve = SubResource( 8 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Sides"]
 position = Vector2( -51, 68 )
+rotate = false
+loop = false
+
+[node name="BossMove" type="Path2D" parent="."]
+curve = SubResource( 9 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="BossMove"]
+position = Vector2( 42, 32 )
 rotate = false
 loop = false
 

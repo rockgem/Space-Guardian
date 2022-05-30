@@ -9,6 +9,7 @@ signal powerup_gained
 signal enemy_destroyed
 signal scroll_stopped
 signal boss_destroyed
+signal player_destroyed
 
 # this is kinda useless tbh, i just 
 # put this here for reference
@@ -33,6 +34,10 @@ var player_attack_speed: float = 0.1
 var current_level: int = 1
 
 
+func _ready():
+	connect("boss_destroyed", self, 'on_boss_destroyed')
+
+
 func powerup_gain(type: int):
 	match type:
 		1: 
@@ -51,7 +56,8 @@ func powerup_gain(type: int):
 				player_health = 5
 
 
-
+func on_boss_destroyed():
+	pass
 
 
 

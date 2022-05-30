@@ -45,6 +45,10 @@ func add_powerup():
 	$YSort.add_child(np)
 
 
+func change_level():
+	pass
+
+
 func _on_PowerupTimer_timeout():
 	add_powerup()
 	
@@ -85,7 +89,7 @@ func _on_LevelTimer_timeout():
 	GameManager.emit_signal("scroll_stopped") # Player.tscn's 'Back' node  listens to this signal
 	
 	var boss = load("res://actors/entities/Boss.tscn").instance()
-	$EnemySpawner.add_child(boss)
+	$BossMove/PathFollow2D.add_child(boss)
 	$LevelTimer.stop()
 
 

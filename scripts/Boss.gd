@@ -10,13 +10,14 @@ var dir = -1
 
 func _ready():
 	GameManager.connect("boss_destroyed", self, 'death')
+#	set_physics_process(true)
 	
-	$Tween.interpolate_property(self, 'position:y', null, position.y + 100, 1.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	$Tween.start()
+#	$Tween.interpolate_property(self, 'position:y', null, position.y + 100, 1.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+#	$Tween.start()
 
 
-func _physics_process(delta):
-	pass
+#func _physics_process(delta):
+#	get_parent().offset += 40 * delta
 
 
 func death():
@@ -45,12 +46,14 @@ func _on_AttackTimer_timeout():
 
 func _on_AttackCooldown_timeout():
 	if $AttackTimer.is_stopped():
+#		set_physics_process(false)
 		$AttackTimer.start()
 		$AttackDuration.start()
 	else:
+#		set_physics_process(true)
 		$AttackTimer.stop()
 	
-	$Tween.interpolate_property(self, 'position:x', null, (position.x + 40) * dir, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.interpolate_property(get_parent(), 'offset', get_parent().offset, 140 * dir, 2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$Tween.start()
 	if dir == -1:
 		dir = 1

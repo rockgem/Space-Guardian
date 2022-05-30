@@ -58,4 +58,35 @@ margin_bottom = -6.0
 focus_mode = 0
 text = "Options"
 
+[node name="GameoverPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -68.0
+margin_right = 58.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="GameoverPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "You died
+
+Gameover"
+align = 1
+valign = 1
+
+[node name="Restart" type="Button" parent="GameoverPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -42.0
+margin_top = -27.0
+margin_right = 42.0
+margin_bottom = -7.0
+text = "Restart"
+
 [connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="GameoverPanel/Restart" to="." method="_on_Restart_pressed"]
