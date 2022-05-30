@@ -10,6 +10,9 @@ var enemy_group = load("res://actors/entities/EnemyGroup.tscn")
 var rng = RandomNumberGenerator.new()
 onready var custom_paths = [$CurveSideRight, $CurveSideLeft, $U, $Sides]
 
+
+
+
 func _ready():
 	GameManager.connect("enemy_destroyed", self, 'on_enemy_destroyed')
 	GameManager.connect("boss_destroyed", self, 'on_boss_destroyed')

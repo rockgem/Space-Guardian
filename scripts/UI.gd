@@ -19,7 +19,7 @@ func _physics_process(delta):
 
 
 func on_player_destroyed():
-	pass
+	$GameoverPanel.show()
 
 
 func _on_Options_pressed():
@@ -29,4 +29,4 @@ func _on_Options_pressed():
 
 
 func _on_Restart_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://scenes/Level1.tscn")
