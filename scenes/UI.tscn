@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/ui/under.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/over.png" type="Texture" id=2]
 [ext_resource path="res://scripts/UI.gd" type="Script" id=3]
+[ext_resource path="res://assets/ui/over_red.png" type="Texture" id=4]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -36,7 +37,7 @@ margin_right = -123.0
 margin_bottom = -17.0
 value = 39.0
 texture_under = ExtResource( 1 )
-texture_progress = ExtResource( 2 )
+texture_progress = ExtResource( 4 )
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 4

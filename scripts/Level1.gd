@@ -11,6 +11,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	GameManager.connect("enemy_destroyed", self, 'on_enemy_destroyed')
+	GameManager.connect("boss_destroyed", self, 'on_boss_destroyed')
 	
 	var player = load("res://actors/entities/Player.tscn").instance()
 	player.global_position = $Spawn.global_position
@@ -18,12 +19,18 @@ func _ready():
 	$YSort.add_child(player)
 
 
+# this function is used to spawn explosions
+# the explosion happens from where the destroyed enemy's position was
 func on_enemy_destroyed(pos: Vector2):
 	get_tree().root.get_node("/root/Sfx/Explosion").play()
 	var e = explosion.instance()
 	e.global_position = pos
 	
 	$YSort.add_child(e)
+
+
+func on_boss_destroyed():
+	pass
 
 
 # generates a powerup and places it randomly between 3 specific points
@@ -47,9 +54,17 @@ func _on_PowerupTimer_timeout():
 
 
 func _on_EnemyTimer_timeout():
-	var e = enemy_group.instance()
-	var rand = rng.randi_range(3, 6)
-	e.set_amount(rand)
+	var rand_e = randi() % 2
+	var rand
+	var e
+	
+	if rand_e == 0:
+		e = enemy.instance()
+	else:
+		e = enemy_group.instance()
+		# randomises the amount of enemies in a group
+		rand = rng.randi_range(3, 6)
+		e.set_amount(rand)
 	
 	# randomly offsets the generated groups of enemies
 	# in the x axis
@@ -59,9 +74,10 @@ func _on_EnemyTimer_timeout():
 
 
 # once this timer pops a boss/miniboss should appear to end the level
+# and would emit a signal that would stop the background from scrolling
 func _on_LevelTimer_timeout():
 	$EnemyTimer.stop()
-	GameManager.emit_signal("scroll_stopped")
+	GameManager.emit_signal("scroll_stopped") # Player.tscn's 'Back' node  listens to this signal
 	
 	var boss = load("res://actors/entities/Boss.tscn").instance()
 	$EnemySpawner.add_child(boss)

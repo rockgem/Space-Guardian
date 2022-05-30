@@ -30,6 +30,8 @@ var player_damage: int = 1
 var player_health: int = 5
 var player_attack_speed: float = 0.1
 
+var current_level: int = 1
+
 
 func powerup_gain(type: int):
 	match type:

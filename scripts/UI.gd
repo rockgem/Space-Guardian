@@ -20,3 +20,13 @@ func _on_Options_pressed():
 	var o = load("res://actors/ui/Options.tscn").instance()
 	
 	$CanvasLayer.add_child(o)
+
+
+
+
+
+
+
+
+
+

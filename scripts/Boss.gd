@@ -67,7 +67,7 @@ func _on_HurtBox_area_entered(area):
 	area.get_parent().queue_free()
 	
 	if hp <= 0:
-		GameManager.emit_signal("boss_destroyed")
+		GameManager.emit_signal("boss_destroyed") # this signal is connected to this node
 
 
 
