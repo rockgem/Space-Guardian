@@ -29,4 +29,5 @@ func _on_Options_pressed():
 
 
 func _on_Restart_pressed():
+	GameManager.reset_game()
 	get_tree().change_scene("res://scenes/Level1.tscn")

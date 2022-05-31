@@ -35,7 +35,7 @@ var current_level: int = 1
 
 
 func _ready():
-	connect("boss_destroyed", self, 'on_boss_destroyed')
+	pass
 
 
 func powerup_gain(type: int):
@@ -56,10 +56,12 @@ func powerup_gain(type: int):
 				player_health = 5
 
 
-func on_boss_destroyed():
-	pass
 
-
+func reset_game():
+	bullets = 200
+	player_damage = 1
+	player_health = 5
+	current_bullet_level = 1
 
 
 

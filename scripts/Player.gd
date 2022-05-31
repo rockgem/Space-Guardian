@@ -68,11 +68,18 @@ func _on_AttackTimer_timeout():
 
 
 func _on_Hurtbox_area_entered(area):
+	if GameManager.player_health <= 0:
+		return
+	
 	GameManager.player_health -= 1
 	area.get_parent().queue_free()
 	
 	if GameManager.player_health <= 0:
 		GameManager.emit_signal("player_destroyed")
+		
+		# only used to spawn an explosion to where the player's position is
+		GameManager.emit_signal("enemy_destroyed", global_position)
+		$Sprite.visible = false
 
 
 

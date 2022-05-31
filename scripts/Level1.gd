@@ -49,7 +49,7 @@ func add_powerup():
 
 
 func change_level():
-	pass
+	get_tree().change_scene("res://scenes/Level1.tscn")
 
 
 func _on_PowerupTimer_timeout():
@@ -61,6 +61,9 @@ func _on_PowerupTimer_timeout():
 	$PowerupTimer.wait_time = rand
 
 
+# this function generates enemies throughout the game
+# there are currently 2 types of enemies, Single, and Grouped enemies
+# please see Enemy.tscn, EnemyGroup.tscn in actors/entities folder
 func _on_EnemyTimer_timeout():
 	randomize()
 	var rand_e = randi() % 2
@@ -77,6 +80,10 @@ func _on_EnemyTimer_timeout():
 		# randomises the amount of enemies in a group
 		rand = rng.randi_range(3, 6)
 		e.set_amount(rand)
+		e.position.x = rng.randf_range(-40, 40)
+		
+		$EnemySpawner.add_child(e)
+		return
 	
 	# randomly offsets the generated groups of enemies
 	# in the x axis

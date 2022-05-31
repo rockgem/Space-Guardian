@@ -53,6 +53,7 @@ func _on_AttackCooldown_timeout():
 #		set_physics_process(true)
 		$AttackTimer.stop()
 	
+	
 	$Tween.interpolate_property(get_parent(), 'offset', get_parent().offset, 140 * dir, 2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$Tween.start()
 	if dir == -1:
