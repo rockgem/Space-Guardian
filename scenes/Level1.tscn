@@ -47,19 +47,18 @@ wait_time = 4.0
 autostart = true
 
 [node name="LevelTimer" type="Timer" parent="."]
-wait_time = 60.0
 autostart = true
 
 [node name="Locations" type="Node2D" parent="."]
 
 [node name="Position2D" type="Position2D" parent="Locations"]
-position = Vector2( 23, -93 )
+position = Vector2( 23, -28 )
 
 [node name="Position2D2" type="Position2D" parent="Locations"]
-position = Vector2( 89, -93 )
+position = Vector2( 89, -28 )
 
 [node name="Position2D3" type="Position2D" parent="Locations"]
-position = Vector2( 158, -93 )
+position = Vector2( 158, -28 )
 
 [node name="YSort" type="YSort" parent="."]
 

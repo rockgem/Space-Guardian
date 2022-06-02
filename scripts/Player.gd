@@ -12,6 +12,7 @@ var bullet = load("res://actors/objects/Bullet.tscn")
 func _ready():
 	GameManager.connect("bullet_changed", self, 'on_bullet_changed')
 	GameManager.connect("player_destroyed", self, 'on_player_destroyed')
+	GameManager.connect("level_success", self, 'on_level_success')
 	$AttackTimer.wait_time = GameManager.player_attack_speed
 
 
@@ -38,9 +39,16 @@ func on_player_destroyed():
 	set_process_unhandled_key_input(false)
 
 
-func on_bullet_changed():
-	pass
-#	bullet.change_bullet()
+func on_level_success():
+	var tween = Tween.new()
+	add_child(tween)
+	tween.interpolate_property(self, 'global_position:y', global_position.y, -50, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN, 1.5)
+	tween.start()
+	
+	can_fire = false
+	$AttackTimer.stop()
+	set_physics_process(false)
+	set_process_unhandled_key_input(false)
 
 
 func _on_AttackTimer_timeout():
@@ -70,12 +78,12 @@ func _on_AttackTimer_timeout():
 func _on_Hurtbox_area_entered(area):
 	if GameManager.player_health <= 0:
 		return
-	
+	   
 	GameManager.player_health -= 1
 	area.get_parent().queue_free()
 	
 	if GameManager.player_health <= 0:
-		GameManager.emit_signal("player_destroyed")
+		GameManager.emit_signal("player_destroyed") # connected to this node also
 		
 		# only used to spawn an explosion to where the player's position is
 		GameManager.emit_signal("enemy_destroyed", global_position)

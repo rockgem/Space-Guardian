@@ -10,6 +10,8 @@ signal enemy_destroyed
 signal scroll_stopped
 signal boss_destroyed
 signal player_destroyed
+signal level_failed
+signal level_success
 
 # this is kinda useless tbh, i just 
 # put this here for reference
@@ -27,7 +29,7 @@ var current_bullet_level: int = 1
 var max_bullet_level: int = 6
 var bullets: int = 200
 var max_bullets:int = 400
-var player_damage: int = 1
+var player_damage: int = 70
 var player_health: int = 5
 var player_attack_speed: float = 0.1
 
@@ -35,7 +37,11 @@ var current_level: int = 1
 
 
 func _ready():
-	pass
+	connect("level_success", self, 'on_level_success')
+
+
+func on_level_success():
+	current_level += 1
 
 
 func powerup_gain(type: int):

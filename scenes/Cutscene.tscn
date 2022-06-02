@@ -1,8 +1,118 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Cutscene.gd" type="Script" id=1]
+[ext_resource path="res://assets/bg/background starts.png" type="Texture" id=2]
+[ext_resource path="res://assets/bg/background.png" type="Texture" id=3]
+[ext_resource path="res://resources/styles/font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/ui/faces/male_03.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/faces/male_04.png" type="Texture" id=6]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+// Ranges from 0 to 1 over the course of the transition.
+// We use this to actually animate the shader.
+uniform float progress : hint_range(0, 1);
+
+// Size of each diamond, in pixels.
+uniform float diamondPixelSize = 10f;
+
+void fragment() {
+	float xFraction = fract(FRAGCOORD.x / diamondPixelSize);
+	float yFraction = fract(FRAGCOORD.y / diamondPixelSize);
+	float xDistance = abs(xFraction - 0.5);
+	float yDistance = abs(yFraction - 0.5);
+	if (xDistance + yDistance + UV.x + UV.y > progress * 4f) {
+		discard;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 2 )
+shader_param/progress = 0.0
+shader_param/diamondPixelSize = 20.0
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+bg_color = Color( 0.219608, 0.207843, 0.345098, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.172549, 0.458824, 0.972549, 1 )
 
 [node name="Cutscene" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -273, -13 )
 script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Transition" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="Dialog" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -81.0
+margin_top = -83.0
+margin_right = 81.0
+margin_bottom = -23.0
+custom_fonts/font = ExtResource( 4 )
+custom_styles/normal = SubResource( 1 )
+text = "sdfsdfsdfdsfddfadfdafdafadfadfadf"
+autowrap = true
+clip_text = true
+
+[node name="Face1" type="TextureRect" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = -118.0
+margin_right = 49.0
+margin_bottom = -86.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 5 )
+
+[node name="Face2" type="TextureRect" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -49.0
+margin_top = -118.0
+margin_right = -17.0
+margin_bottom = -86.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+
+[node name="DialogTimer" type="Timer" parent="."]
+wait_time = 0.02
+
+[connection signal="gui_input" from="." to="." method="_on_Cutscene_gui_input"]
+[connection signal="timeout" from="DialogTimer" to="." method="_on_DialogTimer_timeout"]

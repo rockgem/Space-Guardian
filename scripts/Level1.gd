@@ -21,6 +21,8 @@ func _ready():
 	player.global_position = $Spawn.global_position
 	
 	$YSort.add_child(player)
+	
+	GameManager.reset_game()
 
 
 # this function is used to spawn explosions
@@ -34,7 +36,7 @@ func on_enemy_destroyed(pos: Vector2):
 
 
 func on_boss_destroyed():
-	pass
+	GameManager.emit_signal("level_success")
 
 
 # generates a powerup and places it randomly between 3 specific points

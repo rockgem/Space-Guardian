@@ -4,16 +4,16 @@ extends Sprite
 var bullet = load("res://actors/objects/EnemyBullet.tscn")
 
 var hp: int = 400
-var move_speed: float = 70
-var dir = -1
+#var move_speed: float = 70
+var dir = -1 # direction -1 going left and 1 to the right(used in tweening)
 
 
 func _ready():
 	GameManager.connect("boss_destroyed", self, 'death')
 #	set_physics_process(true)
 	
-#	$Tween.interpolate_property(self, 'position:y', null, position.y + 100, 1.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-#	$Tween.start()
+	$Tween.interpolate_property(self, 'position:y', position.y - 40, position.y, 1.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.start()
 
 
 #func _physics_process(delta):
@@ -52,7 +52,6 @@ func _on_AttackCooldown_timeout():
 	else:
 #		set_physics_process(true)
 		$AttackTimer.stop()
-	
 	
 	$Tween.interpolate_property(get_parent(), 'offset', get_parent().offset, 140 * dir, 2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$Tween.start()

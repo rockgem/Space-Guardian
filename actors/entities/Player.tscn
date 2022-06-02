@@ -34,25 +34,23 @@ layer = -100
 [node name="Back" type="Node2D" parent="CanvasLayer"]
 script = ExtResource( 5 )
 
-[node name="Sprite3" type="Sprite" parent="CanvasLayer/Back"]
+[node name="Back1" type="Sprite" parent="CanvasLayer/Back"]
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Sprite4" type="Sprite" parent="CanvasLayer/Back"]
+[node name="Back2" type="Sprite" parent="CanvasLayer/Back"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Back3" type="Sprite" parent="CanvasLayer/Back"]
 position = Vector2( 0, -320 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Sprite" type="Sprite" parent="CanvasLayer/Back"]
-texture = ExtResource( 3 )
-centered = false
-
-[node name="Sprite2" type="Sprite" parent="CanvasLayer/Back"]
+[node name="Back4" type="Sprite" parent="CanvasLayer/Back"]
 position = Vector2( 0, -320 )
 texture = ExtResource( 3 )
 centered = false
-
-[node name="Sprite5" type="Sprite" parent="CanvasLayer/Back"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
