@@ -29,7 +29,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 2 )
-shader_param/progress = 0.0
+shader_param/progress = 1.0
 shader_param/diamondPixelSize = 20.0
 
 [sub_resource type="StyleBoxFlat" id=1]

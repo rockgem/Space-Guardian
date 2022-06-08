@@ -8,7 +8,9 @@ signal bullet_changed
 signal powerup_gained
 signal enemy_destroyed
 signal scroll_stopped
+signal scroll_activated
 signal boss_destroyed
+signal mini_boss_destroyed
 signal player_destroyed
 signal level_failed
 signal level_success

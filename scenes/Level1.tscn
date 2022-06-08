@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/Level1.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Back.gd" type="Script" id=2]
+[ext_resource path="res://assets/bg/background starts.png" type="Texture" id=3]
+[ext_resource path="res://assets/bg/background.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 180.5 )
@@ -30,8 +33,46 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 42, 32, -44.0972, 0.31498, 44.0972, -0.31498, 90, 22, 0, 0, 0, 0, 135, 33 )
 }
 
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 89, 25, 0, 0, 0, 0, 43, 90, 0, 0, 0, 0, 89, 167, 0, 0, 0, 0, 137, 86, 0, 0, 0, 0, 89, 26 )
+}
+
+[sub_resource type="Curve2D" id=11]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 17, 35, 0, 0, 0, 0, 43, 90, 0, 0, 0, 0, 93, 114, 0, 0, 0, 0, 137, 86, 0, 0, 0, 0, 165, 41 )
+}
+
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
+background_texture = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Back" type="Node2D" parent="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Back1" type="Sprite" parent="CanvasLayer/Back"]
+centered = false
+offset = Vector2( 0, -960 )
+
+[node name="Back2" type="Sprite" parent="CanvasLayer/Back"]
+visible = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Back3" type="Sprite" parent="CanvasLayer/Back"]
+visible = false
+position = Vector2( 0, -320 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Back4" type="Sprite" parent="CanvasLayer/Back"]
+visible = false
+position = Vector2( 0, -320 )
+texture = ExtResource( 3 )
+centered = false
 
 [node name="Spawn" type="Position2D" parent="."]
 position = Vector2( 89, 297 )
@@ -44,9 +85,6 @@ autostart = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 4.0
-autostart = true
-
-[node name="LevelTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="Locations" type="Node2D" parent="."]
@@ -137,6 +175,21 @@ position = Vector2( 42, 32 )
 rotate = false
 loop = false
 
+[node name="BossMove2" type="Path2D" parent="."]
+curve = SubResource( 10 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="BossMove2"]
+position = Vector2( 89, 25 )
+rotate = false
+loop = false
+
+[node name="BossMove3" type="Path2D" parent="."]
+curve = SubResource( 11 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="BossMove3"]
+position = Vector2( 17, 35 )
+rotate = false
+loop = false
+
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
-[connection signal="timeout" from="LevelTimer" to="." method="_on_LevelTimer_timeout"]

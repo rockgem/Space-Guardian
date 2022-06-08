@@ -6,6 +6,7 @@ var bullet = load("res://actors/objects/EnemyBullet.tscn")
 var hp: int = 400
 #var move_speed: float = 70
 var dir = -1 # direction -1 going left and 1 to the right(used in tweening)
+var is_mini_boss: bool = false
 
 
 func _ready():
@@ -16,8 +17,11 @@ func _ready():
 	$Tween.start()
 
 
-#func _physics_process(delta):
-#	get_parent().offset += 40 * delta
+func set_attributes(att: Dictionary):
+	hp = att['hp']
+	$AttackTimer.wait_time = att['attack_timer']
+	$AttackCooldown.wait_time = att['attack_cooldown']
+	$AttackDuration.wait_time = att['attack_duration']
 
 
 func death():
@@ -70,7 +74,13 @@ func _on_HurtBox_area_entered(area):
 	GameManager.emit_signal("enemy_destroyed", area.get_parent().global_position)
 	area.get_parent().queue_free()
 	
+	# this whole block could be changed lmao no time to do so my back hurts
 	if hp <= 0:
+		if is_mini_boss:
+			GameManager.emit_signal("mini_boss_destroyed")
+			death()
+			return
+		
 		GameManager.emit_signal("boss_destroyed") # this signal is connected to this node
 
 
